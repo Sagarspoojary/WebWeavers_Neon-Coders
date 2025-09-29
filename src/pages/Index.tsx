@@ -1,13 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import Navigation from '@/components/Navigation';
+import Hero from '@/components/Hero';
+import About from '@/components/About';
+import Team from '@/components/Team';
+import Achievements from '@/components/Achievements';
+import Publications from '@/components/Publications';
+import Societies from '@/components/Societies';
+import Events from '@/components/Events';
+import Contact from '@/components/Contact';
+import LoginModal from '@/components/LoginModal';
+import { AuthProvider } from '@/hooks/useAuth';
+import { NotificationsProvider } from '@/hooks/useNotifications';
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <AuthProvider>
+      <NotificationsProvider>
+        <div className="min-h-screen bg-background">
+          <Navigation />
+          <Hero />
+          <About />
+          <Team />
+          <Achievements />
+          <Publications />
+          <Societies />
+          <Events />
+          <Contact />
+          <LoginModal />
+        </div>
+      </NotificationsProvider>
+    </AuthProvider>
   );
 };
 

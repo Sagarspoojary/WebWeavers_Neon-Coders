@@ -1,42 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* IEEE Student Branch Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* IEEE Color Palette */
+    --ieee-deep-blue: 221 100% 31%; /* #0033A0 */
+    --ieee-accent-blue: 207 100% 40%; /* #0072CE */
+    --ieee-white: 0 0% 100%; /* #FFFFFF */
+    --cool-gray-light: 210 29% 97%; /* #F5F7FA */
+    --cool-gray: 210 14% 89%; /* #E6E9EE */
+    --text-dark: 215 64% 16%; /* #0B2545 */
+    
+    /* Semantic Design Tokens */
+    --background: var(--ieee-white);
+    --foreground: var(--text-dark);
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: var(--ieee-white);
+    --card-foreground: var(--text-dark);
+    --card-hover: var(--cool-gray-light);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --primary: var(--ieee-deep-blue);
+    --primary-foreground: var(--ieee-white);
+    --primary-hover: 221 100% 28%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --secondary: var(--ieee-accent-blue);
+    --secondary-foreground: var(--ieee-white);
+    --secondary-hover: 207 100% 37%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --accent: var(--cool-gray);
+    --accent-foreground: var(--text-dark);
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: var(--cool-gray-light);
+    --muted-foreground: 215 25% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --border: var(--cool-gray);
+    --input: var(--cool-gray-light);
+    --ring: var(--ieee-accent-blue);
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--ieee-white);
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    --radius: 1rem;
+    
+    /* IEEE Gradients */
+    --gradient-ieee: linear-gradient(135deg, hsl(var(--ieee-deep-blue)), hsl(var(--ieee-accent-blue)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--ieee-deep-blue)) 0%, hsl(var(--ieee-accent-blue)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--cool-gray-light)), hsl(var(--ieee-white)));
+    
+    /* Shadows */
+    --shadow-card: 0 4px 6px -1px hsl(var(--ieee-deep-blue) / 0.1), 0 2px 4px -1px hsl(var(--ieee-deep-blue) / 0.06);
+    --shadow-card-hover: 0 10px 15px -3px hsl(var(--ieee-deep-blue) / 0.1), 0 4px 6px -2px hsl(var(--ieee-deep-blue) / 0.05);
+    --shadow-elegant: 0 20px 25px -5px hsl(var(--ieee-deep-blue) / 0.1), 0 10px 10px -5px hsl(var(--ieee-deep-blue) / 0.04);
+    
+    /* Transitions */
+    --transition-smooth: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-quick: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +123,123 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold;
+  }
+}
+
+@layer components {
+  /* IEEE Button Variants */
+  .btn-ieee-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary-hover 
+           px-6 py-3 rounded-2xl font-medium shadow-card hover:shadow-card-hover
+           transition-[var(--transition-smooth)] transform hover:scale-[1.02];
+  }
+  
+  .btn-ieee-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary-hover
+           px-6 py-3 rounded-2xl font-medium shadow-card hover:shadow-card-hover
+           transition-[var(--transition-smooth)] transform hover:scale-[1.02];
+  }
+  
+  .btn-ieee-outline {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground
+           px-6 py-3 rounded-2xl font-medium
+           transition-[var(--transition-smooth)] transform hover:scale-[1.02];
+  }
+  
+  /* IEEE Card Components */
+  .card-ieee {
+    @apply bg-card text-card-foreground border border-border rounded-2xl
+           shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)]
+           transition-[var(--transition-smooth)] transform hover:scale-[1.02];
+  }
+  
+  .card-ieee-elevated {
+    @apply bg-card text-card-foreground border-0 rounded-2xl
+           shadow-[var(--shadow-elegant)] hover:shadow-[var(--shadow-card-hover)]
+           transition-[var(--transition-smooth)] transform hover:scale-[1.05];
+  }
+  
+  /* Navigation */
+  .nav-link {
+    @apply text-foreground hover:text-primary font-medium
+           transition-[var(--transition-quick)] relative
+           after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
+           after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right 
+           after:transition-transform after:duration-300 
+           hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+  
+  .nav-link-active {
+    @apply text-primary after:scale-x-100;
+  }
+  
+  /* Animations */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .fade-in-left {
+    animation: fadeInLeft 0.8s ease-out forwards;
+  }
+  
+  .fade-in-right {
+    animation: fadeInRight 0.8s ease-out forwards;
+  }
+  
+  /* Gradient Backgrounds */
+  .bg-ieee-gradient {
+    background: var(--gradient-ieee);
+  }
+  
+  .bg-hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-subtle-gradient {
+    background: var(--gradient-subtle);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
